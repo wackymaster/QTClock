@@ -1,6 +1,5 @@
 # QTClock
 ![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)
-![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
 ![Beta](https://img.shields.io/badge/Status-Beta-lightgrey.svg?maxAge=2592000)
 ![Branch](https://img.shields.io/badge/Branch-Native-yellow.svg?maxAge=2592000)  
 
