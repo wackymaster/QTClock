@@ -14,3 +14,18 @@
 * Uses Matplotlib and Numpy Libraries
 * Simple GUI for Reading CSV 
 * Display a clock-like graph for CSV!
+
+## Requirements
+- Python 2.7
+- Matplotlib and Numpy installed (included)
+- Patience
+
+---
+
+## License
+
+Toast Consumer App is released under the MIT license. See LICENSE for details.
+
+---
+
+*Still in Development*
