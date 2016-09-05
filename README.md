@@ -2,6 +2,7 @@
 ![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)
 ![Beta](https://img.shields.io/badge/Status-Beta-lightgrey.svg?maxAge=2592000)
 ![Branch](https://img.shields.io/badge/Branch-Native-yellow.svg?maxAge=2592000)  
+![Python](https://img.shields.io/pypi/pyversions/Django.svg?maxAge=2592000) 
 
 
 <img src="https://lh3.googleusercontent.com/QXJLapAIV47X-2s3PXUVZyN7koXTvOgvy7jSqJ2W6FPhXl5gFO4wZI-EpqWEeg0zWBTFnWa4RQ=w1920-h1080-rw-no" width="350", height = "350">
