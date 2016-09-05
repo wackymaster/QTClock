@@ -7,7 +7,7 @@
 
 <img src="https://lh3.googleusercontent.com/QXJLapAIV47X-2s3PXUVZyN7koXTvOgvy7jSqJ2W6FPhXl5gFO4wZI-EpqWEeg0zWBTFnWa4RQ=w1920-h1080-rw-no" width="350", height = "350">
 
-<img src="https://lh3.googleusercontent.com/-Jk4nA_7eDiI/V82im0RmoiI/AAAAAAAAEpM/jW7Y8Xuqo4MxP8uxyrCAGADwMTs7FyHJACL0B/w530-d-h398-p-rw/figure_1.png" width="350", height = "250">
+<img src="https://lh3.googleusercontent.com/-Jk4nA_7eDiI/V82im0RmoiI/AAAAAAAAEpM/jW7Y8Xuqo4MxP8uxyrCAGADwMTs7FyHJACL0B/w530-d-h398-p-rw/figure_1.png" width="350", height = "260">
 
 ## About  
 * Written in Python 2.7
