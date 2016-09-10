@@ -30,13 +30,19 @@ last_time = x[-1]
 
 x[:] = [float(a - first_time) for a in x]
 x[:] = [float(a/3600) for a in x]
-text_file = open("Output.txt", "w")
-text_file.write("Purchase Amount: %s" % x)
-text_file.close()
+
 first_time = x[1]
+
+
+
 last_time = x[-1]
 degrees_total = (last_time/24)*360
 degrees = degrees_total/last_time
+time_difference = [float((a/last_time)*degrees_total) for a in x]
+counter2 = 0
+#while(counter2 < len(time_difference)):
+    #time_difference[counter2]=x[counter2]*time_difference[counter2]
+    #counter2 +=1
 new_x = [float(a*degrees) for a in x]
 print(first_time, last_time)
 ax = plt.subplot(111, projection='polar')
@@ -47,5 +53,6 @@ ax.set_xticklabels(range(int(last_time+1)))
 ax.set_yticks((0.300,0.350,0.400,0.450,0.500,0.550,0.600))
 ax.set_ylim([0.3,0.6])
 ax.set_yticklabels(('300','350','400','450','500','550','600'))
-ax.plot(np.deg2rad(new_x),y)
+#ax.plot(np.deg2rad(new_x),y)
+ax.plot(np.deg2rad(time_difference),y)
 plt.show()
