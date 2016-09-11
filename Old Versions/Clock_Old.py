@@ -20,7 +20,6 @@ def plotCSV():
     x = []
     y = []
     z = []
-    start_time = time.time()
     with open(file_location,'r') as csvfile:
         print('Recieving Data from CSV...')
         reader = csv.reader(csvfile,delimiter = ',')
@@ -36,7 +35,6 @@ def plotCSV():
 
     # Filter Data
     counter1 = 0
-    print('Converting To Hours...')
     while(counter1 < len(x)):
         x[counter1] = time.strptime(x[counter1],time_format)# Convert Given Time to DateTime Format
         x[counter1] = datetime.timedelta(days=x[counter1].tm_mday,hours=x[counter1].tm_hour,minutes=x[counter1].tm_min,seconds=x[counter1].tm_sec).total_seconds()
@@ -47,13 +45,11 @@ def plotCSV():
 
     #x[:] = [float(a - first_time) for a in x]
     x[:] = [float(a/3600) for a in x]
-    print('Generating Plot...')
+
     first_time = x[1]
     last_time = x[-1]
-    print('Calculating Degrees...')
     degrees_total = (last_time/24)*360
     degrees = degrees_total/last_time
-    print('Plotting...')
     x = [float((a/last_time)*degrees_total) for a in x]
     ax = plt.subplot(111, projection='polar')
     ax.set_theta_direction(-1)
@@ -63,9 +59,7 @@ def plotCSV():
     ax.set_yticks((0.300,0.350,0.400,0.450,0.500,0.550,0.600))
     ax.set_ylim([0.3,0.6])
     ax.set_yticklabels(('300','350','400','450','500','550','600'))
-    ax.plot(np.deg2rad(x),y)
-    elapsed_time = time.time() - start_time
-    print('Done in:', elapsed_time, 'seconds')
+    ax.plot(np.deg2rad(x),y, color = '0.75' )
     plt.show()
 
 def findCSV():
