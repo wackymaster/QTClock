@@ -8,11 +8,9 @@
 ## About  
 * Meant for Doctors Who Want to Better Understand How Their Patient's Heart Rate
 * Written in Python 2.7
-* Uses Matplotlib and Numpy Libraries
 * Simple GUI for Reading CSV in a Clock-Style View!
 
 ## Requirements
-* Python 2.7
 * Matplotlib and Numpy *Automatically Downloads With Project*
 * Patience
 
