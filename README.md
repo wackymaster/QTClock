@@ -3,7 +3,7 @@
 ![Branch](https://img.shields.io/badge/Branch-Master-yellow.svg?maxAge=2592000)
 ![Python](https://img.shields.io/pypi/pyversions/Django.svg?maxAge=2592000) 
  
- ***View Your Medical Patient's Heart Rate Measurements in an Easy-To-Use and Elegant Clock-Style View***
+ ***View Your Medical Patient's Measurements in an Easy-To-Use and Elegant Clock-Style View***
  
 ## About  
 * Meant for Doctors Who Want to Better Understand How Their Patient's Heart Rate
