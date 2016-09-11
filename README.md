@@ -21,5 +21,10 @@
 QTClock is released under the MIT license. See LICENSE for details.
 
 ---
+## To Do
+- [x] Exact Timing
+- [x] Better GUI
+- [x] Customizability
+- [ ] Color for Drug Concentration Option  
 
 *Still in Development*
