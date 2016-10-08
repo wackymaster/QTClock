@@ -35,7 +35,8 @@
 - [ ] Color for Drug Concentration Option    
 
 ## License
-QTClock is released under the MIT license. See LICENSE for details.
+QTClock is released under the MIT license. See LICENSE for details.  
+
 ---
 
 *Always Being Improved*
