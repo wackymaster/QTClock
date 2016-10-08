@@ -21,16 +21,22 @@
 
  We Are Open to Contributions! Feel Free Recommend Pull Requests and Improve the Wiki.
 
-## License
-
-QTClock is released under the MIT license. See LICENSE for details.
+## Recently Added
+* Danger Zones
+* Healthy Zones
+* Legend
+* Cleaner Code
 
 ## To Do List
 - [x] Exact Timing
 - [x] Better GUI
 - [x] Customizability
-- [ ] Color for Drug Concentration Option  
- 
+- [x] Danger and Healthy Zones
+- [ ] Color for Drug Concentration Option    
+
+## License
+
+QTClock is released under the MIT license. See LICENSE for details.
 ---
 
 *Always Being Improved*
