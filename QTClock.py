@@ -1,3 +1,6 @@
+# User Variables
+savepng = False # Change to True if you want Clock to be saved as PNG
+
 ##Plotting with Turtle##
 from math import pi
 import numpy as np
@@ -35,6 +38,7 @@ def getCSV(file_location, time_format, time_array, qt_array):
         
 def filterData (x,y,time_format):
         counter1 = 0
+        # Convert To Python Date Format
         print('Converting To Date...')
         while(counter1 < len(x)):
             x[counter1] = time.strptime(x[counter1],time_format)# Convert Given Time to DateTime Format
@@ -43,7 +47,7 @@ def filterData (x,y,time_format):
         first_time = x[1]
         last_time = x[-1]
         print('Converting to Hours...')
-        #x[:] = [float(a - first_time) for a in x]
+        # Calculate degree value amount for each point
         x[:] = [float(a/3600) for a in x]
         print('Generating Plot...')
         first_time = x[1]
@@ -57,16 +61,32 @@ def filterData (x,y,time_format):
 
 def plotCSV(x,y):
     global counter
+    amounts = (len(x)+len(y))/2
+    amount_per_hour = int(amounts/24)
+    print(amount_per_hour)
+    # Create Polar Sublot
     ax = plt.subplot(111, projection='polar')
-    ax.set_theta_direction(-1)
-    ax.set_theta_offset(pi/2.0)
+    ax.set_theta_direction(-1) # Make Plot Go in Right Direction
+    ax.set_theta_offset(pi/2.0)# Put 0 on top
     ax.set_xticklabels(['00:00', '03:00', '06:00', '09:00',
                         '12:00', '15:00', '18:00', '21:00'])
     ax.set_yticks((0.300,0.350,0.400,0.450,0.500,0.550,0.600))
     ax.set_ylim([0.3,0.6])
     ax.set_yticklabels(('300','350','400','450','500','550','600'))
     file_name = os.path.basename(file_location)
-    ax.plot(np.deg2rad(x),y, label = file_name)
+    hour_counter = 0
+    concentrations = ['0.53','0.25','0.45','0.24','0.66','0.45','0.25','0.63','0.46','0.86','0.24','0.34','0.24','0.11','0.2','0.3','0.4','0.5','0.4','0.2','0.634','0.643','0.23','0.66']
+    while hour_counter < 24:
+        color_variant = concentrations[hour_counter]
+        rgb_variant = float(color_variant)*255
+        rgb_value = (255,(rgb_variant),0)
+        hex_value = '#%02x%02x%02x' % rgb_value
+        reps = amount_per_hour * hour_counter
+        x_chunk = x[int(reps):int(reps + amount_per_hour)]
+        y_chunk = y[int(reps):int(reps + amount_per_hour)]
+        color_graph = '0.75'
+        ax.plot(np.deg2rad(x_chunk),y_chunk,color = hex_value)
+        hour_counter +=1
     if counter == 0:
         theta = np.linspace(0, 2*np.pi, 100)
         ax.fill_between(theta, 0.5, ax.get_ylim()[1],
@@ -77,10 +97,12 @@ def plotCSV(x,y):
                         label="healthy")
         counter +=1
     ax.legend(loc="upper left", bbox_to_anchor=(1,1.1))
+    if savepng:
+        plt.savefig(str(file_name + ".png"))
     plt.show()
+    
 
         
-
 def findCSV():
     global file_location
     filename = askopenfilename()
