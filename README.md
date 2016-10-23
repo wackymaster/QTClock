@@ -32,7 +32,7 @@
 - [x] Better GUI
 - [x] Customizability
 - [x] Danger and Healthy Zones
-- [ ] Color for Drug Concentration Option    
+- [x] Color for Drug Concentration Option    
 
 ## License
 QTClock is released under the MIT license. See LICENSE for details.  
