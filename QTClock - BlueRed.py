@@ -61,8 +61,10 @@ def filterData (x,y,time_format):
 
 def plotCSV(x,y):
     global counter
+
+    concentrations = ['0.53','0.25','0.45','0.24','0.66','0.45','0.25','0.63','0.46','0.86','0.24','0.34','0.24','0.11','0.2','0.3','0.4','0.5','0.4','0.2','0.634','0.643','0.23','0.66']
     amounts = (len(x)+len(y))/2
-    amount_per_hour = int(amounts/24)
+    amount_per_hour = int(amounts/len(concentrations))
     print(amount_per_hour)
     # Create Polar Sublot
     ax = plt.subplot(111, projection='polar')
@@ -75,11 +77,13 @@ def plotCSV(x,y):
     ax.set_yticklabels(('300','350','400','450','500','550','600'))
     file_name = os.path.basename(file_location)
     hour_counter = 0
-    concentrations = ['0.53','0.25','0.45','0.24','0.66','0.45','0.25','0.63','0.46','0.86','0.24','0.34','0.24','0.11','0.2','0.3','0.4','0.5','0.4','0.2','0.634','0.643','0.23','0.66']
-    while hour_counter < 24:
+    
+    while hour_counter < len(concentrations):
         color_variant = concentrations[hour_counter]
         rgb_variant = float(color_variant)*255
-        rgb_value = (255,(rgb_variant),0)
+        red_variance = float(color_variant)*255
+        blue_variance = (1-(float(color_variant)))*255
+        rgb_value = (red_variance,0,blue_variance)
         hex_value = '#%02x%02x%02x' % rgb_value
         reps = amount_per_hour * hour_counter
         x_chunk = x[int(reps):int(reps + amount_per_hour)]
