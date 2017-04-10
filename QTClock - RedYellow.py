@@ -19,31 +19,62 @@ import multiprocessing as mp
 time_format = '%Y-%m-%dT%H:%M:%S.%f'
 time_array = ''
 qt_array = ''
+enableCon = ''
 counter = 0
 
-def getCSV(file_location, time_format, time_array, qt_array):
+def getCSV(file_location, time_format, time_array, qt_array, enableCon):
     # Open CSV
-    x, y = [], []
+    x, y, z = [], [], []
     with open(file_location,'r') as csvfile:
         print('Recieving Data from CSV...')
         reader = csv.reader(csvfile,delimiter = ',')
         for row in reader:
             x.append(row[time_array])
             y.append(row[qt_array])
+            if (enableCon == 1):
+                if row[2] in (None, ""):
+                    z.append(-1)
+                else:
+                    z.append(row[2])
+            if(enableCon == 0):
+                z= [1,1,1]
         # Remove Header        
         x = x[1:]
         y = y[1:]
-        filterData(x,y, time_format)
+        z = z[1:]
+        filterData(x,y, time_format,z, enableCon)
 
         
-def filterData (x,y,time_format):
-        counter1 = 0
+def filterData (x,y,time_format,z, enableCon):
+        counter1, counterz = 0, 0
         # Convert To Python Date Format
         print('Converting To Date...')
         while(counter1 < len(x)):
             x[counter1] = time.strptime(x[counter1],time_format)# Convert Given Time to DateTime Format
             x[counter1] = datetime.timedelta(days=x[counter1].tm_mday,hours=x[counter1].tm_hour,minutes=x[counter1].tm_min,seconds=x[counter1].tm_sec).total_seconds()
-            counter1 +=1    
+            counter1 +=1
+        counter = 0
+        z_new = []
+        z_new2 = []
+        print(len(z)/3500)
+        if enableCon == 1:
+            while counter < len(z)/3500:
+                z_chunk = z[int(counter*3500):int((counter+1))*3500]
+                i = 1
+                while i <len(z_chunk):
+                    if z_chunk[i]==-1:
+                        pass
+                    if z_chunk[i]!=-1:
+                        z_new.append(float(z_chunk[i]))
+                    i += 1
+                #print(z_new)
+                
+                z_new2.append((sum(z_new)/len(z_new)))
+                del z_new[:]
+                z_new.append(0)
+                print(z_new2)
+                counter += 1
+            z=z_new2
         first_time = x[1]
         last_time = x[-1]
         print('Converting to Hours...')
@@ -57,15 +88,14 @@ def filterData (x,y,time_format):
         degrees = degrees_total/last_time
         print('Plotting...')
         x = [float((a/last_time)*degrees_total) for a in x]
-        plotCSV(x,y)
+        plotCSV(x,y,z)
 
-def plotCSV(x,y):
+def plotCSV(x,y,z):
     global counter
-
-    concentrations = ['0.53','0.25','0.45','0.24','0.66','0.45','0.25','0.63','0.46','0.86','0.24','0.34','0.24','0.11','0.2','0.3','0.4','0.5','0.4','0.2','0.634','0.643','0.23','0.66']
+    concentrations = z
     amounts = (len(x)+len(y))/2
     amount_per_hour = int(amounts/len(concentrations))
-    print(amount_per_hour)
+    #print(amount_per_hour)
     # Create Polar Sublot
     ax = plt.subplot(111, projection='polar')
     ax.set_theta_direction(-1) # Make Plot Go in Right Direction
@@ -118,10 +148,13 @@ def finished():
     time_format = E1.get()
     time_array = int(E2.get())
     qt_array = int(E3.get())
-    getCSV(file_location, time_format, time_array, qt_array)
+    enableCon = int(conBool.get())
+    print(enableCon)
+    getCSV(file_location, time_format, time_array, qt_array, enableCon)
 
     
-if __name__=='__main__':    
+if __name__=='__main__':
+    
     top = Tkinter.Tk()
     top.resizable(width=False, height=False)
     top.geometry('{}x{}'.format(500, 500))
@@ -138,6 +171,9 @@ if __name__=='__main__':
     Done = Tkinter.Button(top, text ="Done", command = finished)
     w = Tkinter.Label(top, text="QTClock",font=("Helvetica", 30))
     w2 = Tkinter.Label(top, text="By Will Wang", font=("Helvetica", 8))
+    conBool = IntVar()
+    conCheck = Tkinter.Checkbutton(top,text="Enable Concentrations", variable = conBool)
+    conCheck.var = conBool
     # Place Everything on Canvas Window
     L1.place(relx=0.3625,rely=0.45)
     L2.place(relx=0.225,rely=0.55)
@@ -149,4 +185,5 @@ if __name__=='__main__':
     Done.place(relx=0.625,rely=0.4)
     w.place(relx=0.35,rely=0.1)
     w2.place(relx=0.35,rely=0.2)
+    conCheck.place(relx=0.45, rely=0.5)
     top.mainloop()
